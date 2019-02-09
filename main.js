@@ -1,6 +1,33 @@
 let PROTOCOLS = {
-  'browser_protocol.json':  'https://cdn.rawgit.com/ChromeDevTools/devtools-protocol/master/json/browser_protocol.json',
-  'js_protocol.json':  'https://cdn.rawgit.com/ChromeDevTools/devtools-protocol/master/json/js_protocol.json',
+  'ApplicationCache': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/ApplicationCache.json',
+  'Audit': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Audit.json',
+  'CPUProfiler': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/CPUProfiler.json',
+  'CSS': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/CSS.json',
+  'Canvas': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Canvas.json',
+  'Console': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Console.json',
+  'DOM': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/DOM.json',
+  'DOMDebugger': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/DOMDebugger.json',
+  'DOMStorage': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/DOMStorage.json',
+  'Database': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Database.json',
+  'Debugger': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Debugger.json',
+  'GenericTypes': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/GenericTypes.json',
+  'Heap': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Heap.json',
+  'IndexedDB': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/IndexedDB.json',
+  'Inspector': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Inspector.json',
+  'LayerTree': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/LayerTree.json',
+  'Memory': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Memory.json',
+  'Network': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Network.json',
+  'OverlayTypes': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/OverlayTypes.json',
+  'Page': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Page.json',
+  'Recording': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Recording.json',
+  'Runtime': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Runtime.json',
+  'ScriptProfiler': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/ScriptProfiler.json',
+  'Security': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Security.json',
+  'ServiceWorker': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/ServiceWorker.json',
+  'Target': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Target.json',
+  'Timeline': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Timeline.json',
+  'Worker': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Worker.json',
+  'Automation': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/WebKit/UIProcess/Automation/Automation.json'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -103,7 +130,7 @@ class App {
     // Assign empty arrays to otherwise undefined fields.
     for (let domain of protocol.domains) {
       domain.commands = domain.commands || [];
-      domain.events = domain.events || [];      
+      domain.events = domain.events || [];
       domain.types = domain.types || [];
       for (let event of domain.events) {
         event.parameters = event.parameters || [];
@@ -149,7 +176,7 @@ class App {
           if (!type)
             continue;
           type.referencedBy.push({
-            type: 'event', 
+            type: 'event',
             name: domain.domain + '.' + event.name
           });
         }
@@ -163,7 +190,7 @@ class App {
           if (!referencedType)
             continue;
           referencedType.referencedBy.push({
-            type: 'type', 
+            type: 'type',
             name: domain.domain + '.' + type.id
           });
         }
@@ -211,7 +238,7 @@ class App {
     this._allDomains.clear();
     this._stableDomains.clear();
 
-    let protocol = App._normalizeProtocol({domains: [].concat(...protocols.map(p => p.domains))});
+    let protocol = App._normalizeProtocol({domains: [].concat(...protocols.map(p => [p]))});
 
     for (let domain of protocol.domains) {
       this._allDomains.set(domain.domain, domain);
