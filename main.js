@@ -17,7 +17,6 @@ let PROTOCOLS = {
   'LayerTree': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/LayerTree.json',
   'Memory': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Memory.json',
   'Network': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Network.json',
-  'OverlayTypes': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/OverlayTypes.json',
   'Page': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Page.json',
   'Recording': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Recording.json',
   'Runtime': 'https://cdn.rawgit.com/WebKit/webkit/master/Source/JavaScriptCore/inspector/protocol/Runtime.json',
